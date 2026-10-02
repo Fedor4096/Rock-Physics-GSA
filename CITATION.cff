@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+type: software
+message: >-
+  If you use this software in your research, please cite this implementation
+  using the metadata below.
+title: "Rock-Physics-GSA: Generalized Singular Approximation for Rock Physics"
+authors:
+  - family-names: "Lozovoi"
+    given-names: "Fedor"
+    alias: "Fedor4096"
+    orcid: "https://orcid.org/0009-0009-6794-0519"
+    affiliation: "Lomonosov Moscow State University (Geophysics; bachelor's studies, 2021–2024)"
+repository-code: "https://github.com/Fedor4096/Rock-Physics-GSA"
+url: "https://github.com/Fedor4096/Rock-Physics-GSA"
+license: AGPL-3.0-only
+abstract: >-
+  Python/Numba and Rust research implementations of the Generalized Singular
+  Approximation method for calculating the effective elastic properties of a
+  two-component rock with horizontally aligned inclusions.
+keywords:
+  - rock physics
+  - generalized singular approximation
+  - effective-medium modelling
+  - anisotropic elasticity
+  - computational geophysics

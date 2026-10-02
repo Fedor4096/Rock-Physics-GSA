@@ -50,7 +50,7 @@ For this project, I:
 - adapted the Python implementation for Numba JIT compilation;
 - benchmarked Python, Python with JIT compilation, and Rust implementations.
 
-The public repository contains the Python/Numba research prototype. The Rust implementation and the complete thesis are not currently included.
+The public repository contains the Python/Numba research prototype and the Rust implementation. The complete thesis is not currently included.
 
 ## Mathematical core
 
@@ -174,11 +174,11 @@ The historical benchmark used:
 |---|---:|:---:|
 | Initial pure-Python prototype | Baseline | No |
 | Python with Numba JIT | Approximately 60× faster | Yes |
-| Rust release build | Approximately 600× faster | No |
+| Rust release build | Approximately 600× faster | Yes |
 
 The Rust release build was approximately ten times faster than the Python/Numba version in this historical experiment.
 
-These figures are environment-specific research results, not universal performance guarantees. The initial pure-Python version and Rust implementation are not included in the public repository, so the complete comparison cannot currently be reproduced from this repository alone.
+These figures are environment-specific research results, not universal performance guarantees. The initial pure-Python version and complete historical benchmark artefacts are not included in the public repository, so the complete comparison cannot currently be reproduced from this repository alone.
 
 ## Research cases
 
@@ -224,7 +224,7 @@ The project includes hands-on work with:
 
 ## Public implementation
 
-The repository contains a Python/Numba prototype for a two-component rock.
+The repository contains Python/Numba and Rust implementations for a two-component rock.
 
 The main script:
 
@@ -239,28 +239,51 @@ The main script:
 
 ```text
 .
-├── GSA.py       # Python/Numba scientific computing prototype
-├── README.md    # Research context and technical documentation
-└── LICENSE      # GNU General Public License v3.0
+├── README.md
+├── LICENSE
+├── CITATION.cff            # Software citation metadata
+├── .gitignore
+├── python/
+│   ├── GSA.py              # Python/Numba scientific computing prototype
+│   └── requirements.txt    # Python dependencies
+└── rust/
+    ├── Cargo.toml          # Rust package and dependencies
+    ├── Cargo.lock          # Resolved Rust dependency versions
+    └── src/
+        └── main.rs        # Rust implementation
 ```
 
-## Running the prototype
+## Running the implementations
+
+Run the following commands from the repository root.
+
+### Python
 
 Install the required Python dependencies:
 
 ```bash
-pip install numpy numba matplotlib plotly seaborn
+python -m pip install -r python/requirements.txt
 ```
 
 Run the default experiment:
 
 ```bash
-python GSA.py
+python python/GSA.py
 ```
 
 The script prints the effective stiffness tensor and total execution time.
 
 The first execution includes JIT compilation overhead. For meaningful performance measurements, compilation time should be separated from repeated calculation time.
+
+### Rust
+
+Install the Rust toolchain with Cargo, then run the default experiment in release mode:
+
+```bash
+cargo run --release --locked --manifest-path rust/Cargo.toml
+```
+
+The executable prints the effective stiffness tensor and total execution time. Cargo stores generated build files in `rust/target/`, which is excluded from version control. The committed `Cargo.lock` records the resolved dependency versions.
 
 ## Limitations
 
@@ -273,8 +296,7 @@ The public implementation currently has the following limitations:
 - arbitrary orientation distributions are not available;
 - integration grids must be configured manually;
 - automated tests and continuous integration are not included;
-- complete validation datasets and benchmark artefacts are not published;
-- the Rust implementation described in the research is not included.
+- complete validation datasets and benchmark artefacts are not published.
 
 The repository should therefore be used to examine the computational approach and research process rather than as a validated production package.
 
@@ -288,4 +310,14 @@ That foundation now informs how I approach products across **AI, cloud computing
 
 ## License
 
-This project is distributed under the [GNU General Public License v3.0](LICENSE).
+Copyright (C) 2023 Fedor Lozovoi.
+
+This project is distributed under the [GNU Affero General Public License v3.0](LICENSE), version 3 only (`AGPL-3.0-only`). The licence text is the unmodified [official GNU AGPLv3 text](https://www.gnu.org/licenses/agpl-3.0.txt).
+
+Earlier revisions released under GPLv3 retain their original licence.
+
+## Citation
+
+If you use this software in your research, please cite the implementation using [CITATION.cff](CITATION.cff). GitHub provides a **Cite this repository** option with APA and BibTeX formats when this file is present on the default branch.
+
+The citation credits the software implementation. Please also acknowledge the scientific publications underlying the GSA method where relevant. The citation request is separate from the licence terms.
